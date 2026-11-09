@@ -1,0 +1,300 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Atlas | Company Knowledge Base</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/styles.css?v=shell-5">
+</head>
+
+<body>
+
+    <!-- Icon sprite (line icons) -->
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+        <defs>
+            <symbol id="i-home" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" /><polyline points="9 22 9 12 15 12 15 22" /></symbol>
+            <symbol id="i-chat" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" /></symbol>
+            <symbol id="i-file" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" /><polyline points="14 2 14 8 20 8" /><line x1="16" y1="13" x2="8" y2="13" /><line x1="16" y1="17" x2="8" y2="17" /></symbol>
+            <symbol id="i-check" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" /><polyline points="22 4 12 14.01 9 11.01" /></symbol>
+            <symbol id="i-chart" viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10" /><line x1="12" y1="20" x2="12" y2="4" /><line x1="6" y1="20" x2="6" y2="14" /></symbol>
+            <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8" /><line x1="21" y1="21" x2="16.65" y2="16.65" /></symbol>
+            <symbol id="i-upload" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><polyline points="17 8 12 3 7 8" /><line x1="12" y1="3" x2="12" y2="15" /></symbol>
+            <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" /><polyline points="12 6 12 12 16 14" /></symbol>
+            <symbol id="i-plus" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19" /><line x1="5" y1="12" x2="19" y2="12" /></symbol>
+            <symbol id="i-arrow" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" /></symbol>
+            <symbol id="i-send" viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13" /><polygon points="22 2 15 22 11 13 2 9 22 2" /></symbol>
+            <symbol id="i-menu" viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6" /><line x1="3" y1="12" x2="21" y2="12" /><line x1="3" y1="18" x2="21" y2="18" /></symbol>
+            <symbol id="i-x" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" /></symbol>
+            <symbol id="i-refresh" viewBox="0 0 24 24"><polyline points="23 4 23 10 17 10" /><polyline points="1 20 1 14 7 14" /><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15" /></symbol>
+            <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" /></symbol>
+        </defs>
+    </svg>
+
+    <div class="app">
+
+        <!-- ═════════ Sidebar ═════════ -->
+        <aside class="sidebar" id="sidebar" aria-label="Main navigation">
+            <a class="brand" href="#" aria-label="Atlas home">
+                <span class="brand-mark">A</span>
+                <span class="brand-text"><b>Atlas</b><small>Knowledge Base</small></span>
+            </a>
+
+            <nav class="sb-nav">
+                <p class="sb-label">Menu</p>
+                <button class="nav active" id="homeTab"><svg class="i"><use href="#i-home" /></svg>Overview</button>
+                <button class="nav" id="chatTab"><svg class="i"><use href="#i-chat" /></svg>Ask a question</button>
+                <button class="nav" id="docsTab"><svg class="i"><use href="#i-file" /></svg>Documents</button>
+                <button class="nav" id="approvalTab"><svg class="i"><use href="#i-check" /></svg>Approvals<span class="count hidden" id="approvalBadge">0</span></button>
+                <button class="nav" id="adminTab"><svg class="i"><use href="#i-chart" /></svg>Reports</button>
+            </nav>
+
+            <div class="sb-foot">
+                <div class="ws-card">
+                    <span class="ws-dot"></span>
+                    <div><b>Demo workspace</b><small>Single workspace · no sign-in</small></div>
+                </div>
+            </div>
+        </aside>
+        <div class="scrim" id="scrim"></div>
+
+        <!-- ═════════ Content ═════════ -->
+        <div class="content">
+            <header class="topbar">
+                <button type="button" class="icon-btn menu-btn" id="menuBtn" aria-label="Open menu"><svg class="i"><use href="#i-menu" /></svg></button>
+                <div class="titles">
+                    <h1 id="heading">Overview</h1>
+                    <p id="crumb">A quick look at your knowledge base</p>
+                </div>
+                <div class="top-actions">
+                    <span class="date-chip" id="greeting"></span>
+                    <button type="button" class="btn btn-primary" id="topAsk"><svg class="i"><use href="#i-chat" /></svg>Ask a question</button>
+                </div>
+            </header>
+
+            <main class="views">
+
+                <!-- ───── Overview ───── -->
+                <section id="homeView" class="view">
+                    <div class="hero">
+                        <div class="hero-copy">
+                            <p class="hero-kicker" id="heroKicker">Welcome back</p>
+                            <h2>Find what your company has already written down.</h2>
+                            <p class="hero-sub">Ask in plain language. Answers come only from approved documents and always show the passage they came from.</p>
+                            <form id="heroForm" class="hero-form">
+                                <svg class="i"><use href="#i-search" /></svg>
+                                <input id="heroInput" type="text" placeholder="Try: How many leave days do I get?" required autocomplete="off">
+                                <button type="submit" class="btn btn-primary">Ask</button>
+                            </form>
+                            <div class="hero-topics">
+                                <span>Popular</span>
+                                <button type="button" data-q="What is our leave policy?">Leave policy</button>
+                                <button type="button" data-q="Summarize the onboarding process">Onboarding</button>
+                                <button type="button" data-q="What are the IT security rules?">IT security</button>
+                            </div>
+                        </div>
+                        <div class="hero-art" aria-hidden="true">
+                            <div class="sheet s1"><i></i><i></i><i></i></div>
+                            <div class="sheet s2"><i></i><i></i><i></i><i></i></div>
+                            <div class="sheet s3"><b></b><i></i><i></i></div>
+                        </div>
+                    </div>
+
+                    <div class="kpis">
+                        <div class="kpi">
+                            <span class="kpi-ic blue"><svg class="i"><use href="#i-file" /></svg></span>
+                            <div><b id="statDocs">–</b><span>Documents in library</span></div>
+                        </div>
+                        <div class="kpi">
+                            <span class="kpi-ic amber"><svg class="i"><use href="#i-clock" /></svg></span>
+                            <div><b id="statPending">–</b><span>Awaiting a decision</span></div>
+                        </div>
+                        <div class="kpi">
+                            <span class="kpi-ic green"><svg class="i"><use href="#i-chat" /></svg></span>
+                            <div><b id="statQuestions">0</b><span>Questions this session</span></div>
+                        </div>
+                        <div class="kpi">
+                            <span class="kpi-ic slate"><svg class="i"><use href="#i-shield" /></svg></span>
+                            <div><b id="statHelpful">0</b><span>Marked helpful</span></div>
+                        </div>
+                    </div>
+
+                    <div class="home-grid">
+                        <section class="card">
+                            <div class="card-head">
+                                <h3>Recent documents</h3>
+                                <button type="button" class="link" id="goDocs">View all</button>
+                            </div>
+                            <div id="ovDocs" class="mini-list"></div>
+                        </section>
+                        <section class="card">
+                            <div class="card-head">
+                                <h3>Waiting for a decision</h3>
+                                <button type="button" class="link" id="goApprovals">Open approvals</button>
+                            </div>
+                            <div id="ovApprovals" class="mini-list"></div>
+                        </section>
+                    </div>
+
+                    <div class="quick-grid">
+                        <button type="button" class="quick" id="qaAsk">
+                            <span class="kpi-ic blue"><svg class="i"><use href="#i-chat" /></svg></span>
+                            <span><b>Ask a question</b><small>Get an answer with references</small></span>
+                            <svg class="i go"><use href="#i-arrow" /></svg>
+                        </button>
+                        <button type="button" class="quick" id="qaUpload">
+                            <span class="kpi-ic green"><svg class="i"><use href="#i-upload" /></svg></span>
+                            <span><b>Add a document</b><small>PDF, Word, text or Markdown</small></span>
+                            <svg class="i go"><use href="#i-arrow" /></svg>
+                        </button>
+                        <button type="button" class="quick" id="qaReview">
+                            <span class="kpi-ic amber"><svg class="i"><use href="#i-check" /></svg></span>
+                            <span><b>Review approvals</b><small>Approve or reject requests</small></span>
+                            <svg class="i go"><use href="#i-arrow" /></svg>
+                        </button>
+                    </div>
+                </section>
+
+                <!-- ───── Ask ───── -->
+                <section id="chatView" class="view hidden">
+                    <div class="workspace">
+
+                        <aside class="ws-history">
+                            <div class="pane-head">
+                                <h3>Recent questions</h3>
+                                <button type="button" class="link" id="clearRecent">Clear</button>
+                            </div>
+                            <div id="recentList" class="recent-list"></div>
+                        </aside>
+
+                        <div class="ws-chat">
+                            <div class="pane-head">
+                                <h3>Conversation</h3>
+                                <button type="button" id="newChat" class="btn btn-quiet"><svg class="i"><use href="#i-plus" /></svg>New chat</button>
+                            </div>
+
+                            <div class="chat-scroll" id="chatScroll">
+                                <div class="empty-chat">
+                                    <span class="empty-mark"><svg class="i"><use href="#i-chat" /></svg></span>
+                                    <h2>Ask about your documents</h2>
+                                    <p>Type a question the way you would ask a colleague. Every answer lists the pages it came from.</p>
+                                    <div class="suggest">
+                                        <button type="button" data-q="What is our leave policy?"><span>What is our leave policy?</span><svg class="i"><use href="#i-arrow" /></svg></button>
+                                        <button type="button" data-q="Summarize the onboarding process"><span>Summarize the onboarding process</span><svg class="i"><use href="#i-arrow" /></svg></button>
+                                        <button type="button" data-q="What are the IT security rules?"><span>What are the IT security rules?</span><svg class="i"><use href="#i-arrow" /></svg></button>
+                                    </div>
+                                </div>
+                                <div id="messages" aria-live="polite"></div>
+                            </div>
+
+                            <div class="composer-wrap">
+                                <form id="chatForm" class="composer">
+                                    <textarea id="question" rows="1" placeholder="Ask a question about company documents…" required></textarea>
+                                    <button type="submit" class="send" id="sendBtn" aria-label="Send question"><svg class="i"><use href="#i-send" /></svg></button>
+                                </form>
+                                <p class="composer-hint">Enter to send · Shift + Enter for a new line · Answers may be inaccurate, so check the sources.</p>
+                            </div>
+                        </div>
+
+                        <aside class="ws-source" id="sourcePanel">
+                            <div class="pane-head">
+                                <h3>Source viewer</h3>
+                                <button type="button" class="icon-btn small" id="closeSource" aria-label="Close source viewer"><svg class="i"><use href="#i-x" /></svg></button>
+                            </div>
+                            <div id="sourceBody" class="source-body">
+                                <p class="muted">Select a source under an answer to read the original passage here.</p>
+                            </div>
+                        </aside>
+                    </div>
+                </section>
+
+                <!-- ───── Documents ───── -->
+                <section id="docsView" class="view hidden">
+                    <div class="docs-grid">
+                        <section class="card">
+                            <div class="card-head">
+                                <div>
+                                    <h3>All documents</h3>
+                                    <p class="sub" id="docCount">Loading…</p>
+                                </div>
+                                <div class="tools">
+                                    <div class="search-field">
+                                        <svg class="i"><use href="#i-search" /></svg>
+                                        <input type="search" id="docFilter" placeholder="Search by title">
+                                    </div>
+                                    <button type="button" class="btn btn-quiet" id="refreshDocs"><svg class="i"><use href="#i-refresh" /></svg>Refresh</button>
+                                </div>
+                            </div>
+                            <div id="docs" class="table"></div>
+                        </section>
+
+                        <section class="card upload-card">
+                            <div class="card-head"><h3>Add a document</h3></div>
+                            <div class="card-pad">
+                                <p class="sub">PDF, Word, text or Markdown, up to 10 MB. Use non-sensitive demo files only.</p>
+                                <form id="uploadForm">
+                                    <label class="dropzone" id="dropzone" for="file">
+                                        <span class="dz-ic"><svg class="i"><use href="#i-upload" /></svg></span>
+                                        <strong id="fileName">Choose a file or drop it here</strong>
+                                        <small>PDF, DOCX, TXT, MD</small>
+                                        <input id="file" type="file" accept=".pdf,.docx,.txt,.md" required>
+                                    </label>
+                                    <button type="submit" id="uploadBtn" class="btn btn-primary block">Upload document</button>
+                                </form>
+                                <ol class="how">
+                                    <li>The file is stored securely in S3.</li>
+                                    <li>It is split into passages and indexed.</li>
+                                    <li>A new upload with the same title becomes the next version.</li>
+                                </ol>
+                            </div>
+                        </section>
+                    </div>
+                </section>
+
+                <!-- ───── Approvals ───── -->
+                <section id="approvalView" class="view hidden">
+                    <div class="bar">
+                        <p class="sub">Approving or rejecting only records the decision. No document is deleted or exported.</p>
+                        <div class="tools">
+                            <span id="approvalSummary" role="status"></span>
+                            <button type="button" id="refreshApprovals" class="btn btn-quiet"><svg class="i"><use href="#i-refresh" /></svg>Refresh</button>
+                        </div>
+                    </div>
+                    <div id="approvalList" aria-live="polite"></div>
+                </section>
+
+                <!-- ───── Reports ───── -->
+                <section id="adminView" class="view hidden">
+                    <section class="card">
+                        <div class="card-head">
+                            <div>
+                                <h3>Workspace metrics</h3>
+                                <p class="sub">Usage and quality figures for this workspace.</p>
+                            </div>
+                            <button type="button" id="refreshMetrics" class="btn btn-quiet"><svg class="i"><use href="#i-refresh" /></svg>Refresh</button>
+                        </div>
+                        <div class="card-pad"><div id="metrics" class="metrics-grid">Loading metrics...</div></div>
+                    </section>
+                    <section class="card gap">
+                        <div class="card-head">
+                            <div>
+                                <h3>Guardrail events</h3>
+                                <p class="sub">Policy and safety checks applied to conversations.</p>
+                            </div>
+                        </div>
+                        <div class="card-pad"><div id="guardrailMetrics" class="metrics-grid">Loading guardrail metrics...</div></div>
+                    </section>
+                </section>
+
+            </main>
+        </div>
+    </div>
+
+    <div id="toast" role="status"></div>
+    <script src="/static/js/app.js?v=shell-5"></script>
+</body>
+
+</html>
