@@ -3,7 +3,8 @@ import logging
 import time
 from functools import lru_cache
 
-from pinecone import Pinecone, DenseVectorQuery
+from pinecone import Pinecone
+from pinecone import DenseVectorQuery
 
 from app.config import settings
 from app.observability import trace

@@ -21,7 +21,7 @@ httpx==0.28.1
 langgraph>=0.2,<2
 
 # Vector Database
-pinecone>=5,<9
+pinecone>=10,<11
 
 # Gemini
 google-genai
