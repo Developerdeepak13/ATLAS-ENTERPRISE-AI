@@ -48,7 +48,7 @@ jobs:
     name: Continuous Delivery
     needs: integration
     runs-on: ubuntu-latest
-    environment: production
+    environment: production-atlas
 
     steps:
       - name: Checkout Code
@@ -94,7 +94,7 @@ jobs:
     name: Continuous Deployment
     needs: build-and-push-ecr-image
     runs-on: [self-hosted, linux, x64, atlas-ec2]
-    environment: production
+    environment: production-atlas
 
     steps:
 
