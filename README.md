@@ -2,8 +2,7 @@
 
 # Atlas Enterprise AI
 
-### Enterprise Knowledge Assistant with RAG, LangGraph, AWS Bedrock, and Automated AWS Deployment
-
+### Enterprise Knowledge Assistant with RAG, LangGraph, Gemini, Groq, and Automated AWS Deployment
 **Document intelligence · Conversational memory · Guardrails · Human review · Observability · CI/CD**
 
 [Overview](#overview) · [Architecture](#architecture) · [Quick Start](#quick-start) · [CI/CD Deployment](#cicd-deployment-to-aws) · [API](#api-reference) · [Security](#security-and-production-readiness)
@@ -42,8 +41,8 @@ The project demonstrates how to connect document ingestion, grounded question an
 | Backend | Python, FastAPI, Uvicorn | APIs and application server |
 | Frontend | HTML, CSS, JavaScript | Browser-based user interface |
 | Orchestration | LangGraph | Stateful RAG workflow |
-| LLM | Amazon Bedrock — Nova Lite | Response generation |
-| Embeddings | Amazon Bedrock — Titan Text Embeddings V2 | Document and query vectors (1,024 dimensions in this project) |
+| LLM | Groq – GPT-OSS-20B | Response generation |
+| Embeddings | Google Gemini – gemini-embedding-001 | Document and query vectors (768 dimensions) |
 | Vector database | Pinecone | Semantic retrieval and document chunk indexing |
 | Object storage | Amazon S3 | Original uploaded documents |
 | Relational database | PostgreSQL on Render | Document metadata, conversations, approvals, feedback, audit |
@@ -55,6 +54,7 @@ The project demonstrates how to connect document ingestion, grounded question an
 
 ## Architecture
 
+
 ### Application architecture
 
 ```mermaid
@@ -65,7 +65,7 @@ flowchart TD
     U -->|Upload complete| API
     API --> ING[Document ingestion]
     ING -->|Read file| S3
-    ING -->|Create embeddings| TITAN[Bedrock Titan Embeddings V2]
+    ING -->|Create embeddings| GEMINI[Gemini Embedding Model]
     ING -->|Upsert vectors| PC[Pinecone]
     ING --> DB[(Render PostgreSQL)]
 
@@ -73,7 +73,7 @@ flowchart TD
     API --> GR[LangGraph RAG + guardrails]
     GR -->|Conversation history| DB
     GR -->|Vector retrieval| PC
-    GR -->|Generate answer| NOVA[Bedrock Nova Lite]
+    GR -->|Generate answer| GROQ[Groq GPT-OSS-20B]
     GR -->|Answer + sources| API
     API --> U
     API -->|Approvals, feedback, audit| DB
@@ -136,8 +136,8 @@ flowchart LR
 
 - Python 3.11+ and pip (use the version compatible with your dependencies)
 - Docker Desktop or Docker Engine for container testing
-- AWS account with access to S3 and the required Amazon Bedrock models
-- Pinecone account and API key
+- Google Gemini API key for embeddings
+- Groq API key for LLM inference- Pinecone account and API key
 - PostgreSQL database (the project uses Render)
 - Optional GlassFlow Rius account
 - For deployment: ECR repository, EC2 Linux instance, GitHub repository, and a registered self-hosted GitHub Actions runner
@@ -184,9 +184,9 @@ Copy `.env.example` to `.env`, then update the values for your environment:
 ```dotenv
 AWS_REGION=us-east-1
 S3_BUCKET=your-private-document-bucket
-BEDROCK_EMBED_MODEL=amazon.titan-embed-text-v2:0
-BEDROCK_CHAT_MODEL=amazon.nova-lite-v1:0
-EMBED_DIM=1024
+GEMINI_EMBED_MODEL=gemini-embedding-001
+GROQ_MODEL=openai/gpt-oss-20b
+EMBED_DIM=768
 
 PINECONE_API_KEY=your-pinecone-key
 PINECONE_INDEX_NAME=atlas-rag-index
@@ -383,8 +383,7 @@ This project intentionally prioritizes understandable implementation over produc
 | --- | --- |
 | Browser upload says “Failed to fetch” | S3 CORS, correct frontend origin, presigned URL, bucket permissions |
 | `No module named app` | Run commands from the repository root using `python -m uvicorn app.main:app` |
-| Pinecone indexing fails | API key, index region, 1,024-dimension configuration, quota |
-| Bedrock request fails | Model availability, region, IAM permissions, model IDs |
+| Gemini/Groq request fails | API keys, model availability, quota, network access |
 | Database connection fails | Render external URL, TLS setting, credentials, network access |
 | GitHub OIDC authentication fails | IAM trust policy, repository name, branch, audience |
 | ECR pull fails on EC2 | Instance IAM role, ECR permissions, region, Docker login |
